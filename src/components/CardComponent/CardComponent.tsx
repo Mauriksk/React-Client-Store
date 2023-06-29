@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
@@ -7,8 +7,9 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart, takeOutToCart } from "../../redux/appSlice";
+import { RootState } from "../../redux/store";
 
 const useStyles = makeStyles({
   root: {
@@ -47,8 +48,8 @@ interface Product {
   max: number;
   min: number;
   name: string;
-  price?: number;
-  url?: string;
+  price: number;
+  url: string;
 }
 
 interface Props {
@@ -69,7 +70,12 @@ export const CardComponent: FC<Props> = ({
     return firstLetter + cutString;
   };
 
-  const [isAdding, setIsAdding] = useState(false);
+  const { products } = useSelector((state: RootState) => state.appSlice);
+
+  const isAdding = (name:string):Boolean => {
+    const matchName = products.filter(product => product.name === name)
+    return matchName.length !== 0
+  }
 
   return (
     <Card className={classes.root}>
@@ -104,13 +110,12 @@ export const CardComponent: FC<Props> = ({
       <CardActions>
         <Button
           onClick={() => {
-            isAdding ? dispatch(takeOutToCart(product)) : dispatch(addToCart(product));
-            setIsAdding(!isAdding)
+            isAdding(product.name) ? dispatch(takeOutToCart(product)) : dispatch(addToCart(product));
           }}
           size="small"
           className={classes.button}
         >
-          {isAdding ? "Take Out" : "Add to cart"}
+          {isAdding(product.name) ? "Take Out" : "Add to cart"}
         </Button>
         <Button size="small" className={classes.button}>
           Learn More

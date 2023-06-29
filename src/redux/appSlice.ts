@@ -6,8 +6,8 @@ interface Product {
   max: number;
   min: number;
   name: string;
-  price?: number;
-  url?: string;
+  price: number;
+  url: string;
 }
 
 export interface AppState {

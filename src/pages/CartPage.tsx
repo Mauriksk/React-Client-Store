@@ -1,7 +1,6 @@
 import {
   Avatar,
   Button,
-  Divider,
   Grid,
   List,
   ListItem,
@@ -12,13 +11,9 @@ import {
 import { AppBarComponent } from "../components/AppBar/AppBar";
 import { RootState } from "../redux/store";
 import { useSelector } from "react-redux";
+import { Product } from "../interfaces/Product";
 
 const useStyles = makeStyles({
-  cartContainer: {
-    width: "60%",
-    height: "80vh",
-    background: "linear-gradient(65deg, #ffffff 15%, #FF8E53 90%)",
-  },
   root: {
     background: "linear-gradient(45deg, #424242 35%, #FF8E53 90%)",
     margin: "20px",
@@ -42,26 +37,11 @@ const useStyles = makeStyles({
     display: "flex",
     justifyContent: "space-between",
   },
-  titleColor: {
-    color: "#FF8E53",
-  },
   textColor: {
     color: "white",
     opacity: "0.8",
   },
-  priceColor: {
-    color: "#FF8E53",
-  },
 });
-
-interface Product {
-  inInventory: number;
-  max: number;
-  min: number;
-  name: string;
-  price: number;
-  url: string;
-}
 
 export const CartPage = () => {
   const classes = useStyles();

@@ -6,7 +6,7 @@ import { Grid } from "@material-ui/core";
 import { AppBarComponent } from "../components/AppBar/AppBar";
 
 export const ProductsPage = () => {
-  const { products, addToCart, takeOutToCart } = useProductPage();
+  const { products } = useProductPage();
 
   return (
     <>
@@ -29,8 +29,6 @@ export const ProductsPage = () => {
           >
             <CardComponent
               product={product}
-              addToCart={addToCart}
-              takeOutToCart={takeOutToCart}
             />
           </Grid>
         ))}

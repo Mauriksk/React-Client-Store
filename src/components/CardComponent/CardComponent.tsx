@@ -10,6 +10,7 @@ import Typography from "@material-ui/core/Typography";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, takeOutToCart } from "../../redux/appSlice";
 import { RootState } from "../../redux/store";
+import { Product } from "../../interfaces/Product";
 
 const useStyles = makeStyles({
   root: {
@@ -43,19 +44,8 @@ const useStyles = makeStyles({
   },
 });
 
-interface Product {
-  inInventory: number;
-  max: number;
-  min: number;
-  name: string;
-  price: number;
-  url: string;
-}
-
 interface Props {
   product: Product;
-  addToCart: (product: Product) => void;
-  takeOutToCart: (product: Product) => void;
 }
 
 export const CardComponent: FC<Props> = ({
